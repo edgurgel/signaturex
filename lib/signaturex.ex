@@ -36,10 +36,10 @@ defmodule Signaturex do
   end
   defp validate_timestamp!(timestamp, timestamp_grace) do
     timestamp = timestamp |> String.to_char_list! |> list_to_integer
-    if (Time.stamp - timestamp) < timestamp_grace do
+    if abs(Time.stamp - timestamp) < timestamp_grace do
       true
     else
-      raise AuthenticationError, message: "Auth timestamp Expired"
+      raise AuthenticationError, message: "Auth timestamp expired"
     end
   end
 
