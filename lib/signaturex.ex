@@ -10,7 +10,7 @@ defmodule Signaturex do
     validate_version!(params["auth_version"])
     validate_timestamp!(params["auth_timestamp"], timestamp_grace)
     validate_key!(key, params["auth_key"])
-    validate_signature!(key, secret, method, path, params, params["auth_signature"])
+    validate_signature!(secret, method, path, params, params["auth_signature"])
 
     true
   end
@@ -51,12 +51,12 @@ defmodule Signaturex do
     raise AuthenticationError, message: "Invalid auth key"
   end
 
-  defp validate_signature!(key, secret, method, path, params, nil) do
+  defp validate_signature!(_secret, _method, _path, _params, nil) do
     raise AuthenticationError, message: "Auth signature missing"
   end
-  defp validate_signature!(key, secret, method, path, params, auth_signature) do
+  defp validate_signature!(secret, method, path, params, auth_signature) do
     params = build_params(params)
-    if auth_signature(key, secret, method, path, params) == auth_signature do
+    if auth_signature(secret, method, path, params) == auth_signature do
       true
     else
       raise AuthenticationError, message: "Invalid auth signature"
@@ -72,11 +72,11 @@ defmodule Signaturex do
     auth_data = auth_data(key)
     params = build_params(params)
     params = Dict.merge(params, auth_data)
-    signature = auth_signature(key, secret, method, path, params)
+    signature = auth_signature(secret, method, path, params)
     Dict.put(auth_data, "auth_signature", signature)
   end
 
-  defp auth_signature(key, secret, method, path, params) do
+  defp auth_signature(secret, method, path, params) do
     method = method |> to_string |> String.upcase
     to_sign = "#{method}\n#{path}\n#{encode_query(params)}"
     CryptoHelper.hmac256_to_string(secret, to_sign)
