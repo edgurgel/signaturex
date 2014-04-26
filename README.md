@@ -10,7 +10,8 @@ Client side:
 
 ```elixir
 signed_params = Signaturex.sign("key", "secret", :put, "/some/path", [q: "asdaf"])
-query_string = URI.encode_query(signed_params)
+params = Dict.merge(signed_params, [q: "asdaf"])
+query_string = URI.encode_query(params)
   HTTPsomething.put("/some/path?" <> query_string)
 ```
 
