@@ -1,4 +1,4 @@
-# Signaturex
+# Signaturex [![Build Status](https://travis-ci.org/edgurgel/signaturex.svg?branch=master)](https://travis-ci.org/edgurgel/signaturex)
 
 Simple key/secret based authentication for APIs.
 
@@ -9,10 +9,11 @@ Totally based on https://github.com/mloughran/signature
 Client side:
 
 ```elixir
-signed_params = Signaturex.sign("key", "secret", :put, "/some/path", [q: "asdaf"])
-params = Dict.merge(signed_params, [q: "asdaf"])
+params = HashDict.new([q: "asdaf"])
+signed_params = Signaturex.sign("key", "secret", :put, "/some/path", params)
+params = Dict.merge(signed_params, params)
 query_string = URI.encode_query(params)
-  HTTPsomething.put("/some/path?" <> query_string)
+HTTPsomething.put("/some/path?" <> query_string)
 ```
 
 Server side:
