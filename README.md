@@ -9,7 +9,7 @@ Totally based on https://github.com/mloughran/signature
 Client side:
 
 ```elixir
-params = HashDict.new([q: "asdaf"])
+params = %{ q: "asdaf" }
 signed_params = Signaturex.sign("key", "secret", :put, "/some/path", params)
 params = Dict.merge(signed_params, params)
 query_string = URI.encode_query(params)
