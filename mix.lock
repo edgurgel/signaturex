@@ -1,1 +1,1 @@
-[ "meck": {:git, "git://github.com/eproxus/meck.git", "917690864617cb9a565e58484c73275a7b40a997", [tag: "0.8"]} ]
+%{"meck": {:git, "git://github.com/eproxus/meck.git", "69f02255a8219185bf55da303981d86886b3c24b", [ref: "69f02255a8219185bf55da303981d86886b3c24b"]}}

@@ -1,18 +1,30 @@
 defmodule Signaturex.Mixfile do
   use Mix.Project
 
+  @description """
+    Yet Another HTTP client for Elixir powered by hackney
+  """
+
   def project do
     [ app: :signaturex,
+      name: "Signaturex",
+      description: @description,
+      elixir: "~> 0.13.1",
       version: "0.0.1",
-      elixir: "~> 0.12.5",
-      deps: deps(Mix.env) ]
+      package: package,
+      deps: deps ]
   end
 
   def application, do: []
 
-  defp deps(:test) do
-    [ { :meck, github: "eproxus/meck", tag: "0.8" } ]
+  defp deps do
+    [ { :meck, github: "eproxus/meck", ref: "69f02255a8219185bf55da303981d86886b3c24b", only: :test } ]
   end
-  defp deps(_), do: []
+
+  defp package do
+    [ contributors: ["Eduardo Gurgel"],
+      licenses: ["MIT"],
+      links: [ { "Github", "https://github.com/edgurgel/signaturex" } ] ]
+  end
 
 end

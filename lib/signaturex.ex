@@ -84,13 +84,14 @@ defmodule Signaturex do
 
   defp encode_query(params) do
     params
+      |> Enum.into([])
       |> Enum.sort(fn({k1, _}, {k2, _}) -> k1 <= k2 end)
       |> URI.encode_query
   end
 
   defp build_params(params) do
     params
-      |> Enum.map(fn({ k, v }) ->
+      |> Enum.traverse(fn { k, v } ->
            k = k |> to_string |> String.downcase
            { k, v }
          end)
@@ -98,10 +99,9 @@ defmodule Signaturex do
   end
 
   defp auth_data(app_key) do
-    [ { "auth_key", app_key},
-      { "auth_timestamp", Time.stamp},
-      { "auth_version", "1.0"} ]
-    |> HashDict.new
+    %{ "auth_key" => app_key,
+       "auth_timestamp" => Time.stamp,
+       "auth_version" => "1.0" }
   end
 
   defmodule Time do
