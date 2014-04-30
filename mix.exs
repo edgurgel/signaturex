@@ -2,7 +2,7 @@ defmodule Signaturex.Mixfile do
   use Mix.Project
 
   @description """
-    Yet Another HTTP client for Elixir powered by hackney
+  Simple key/secret based authentication for APIs
   """
 
   def project do
