@@ -4,6 +4,9 @@ defmodule Signaturex do
   defexception AuthenticationError, message: "Error on authentication"
 
   @doc """
+  Validate request
+
+  Raises an AuthenticationError if the request is invalid
   """
   @spec validate!(binary, binary, binary | atom, binary, Dict.t, integer) :: true
   def validate!(key, secret, method, path, params, timestamp_grace \\ 600) do
@@ -15,11 +18,15 @@ defmodule Signaturex do
     true
   end
 
+  @doc """
+  Validate request
+
+  Returns true or false
+  """
   @spec validate(binary, binary, binary | atom, binary, Dict.t, integer) :: boolean
   def validate(key, secret, method, path, params, timestamp_grace \\ 600) do
     try do
       validate!(key, secret, method, path, params, timestamp_grace)
-      true
     rescue
       e in AuthenticationError -> false
     end
