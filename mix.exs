@@ -10,7 +10,7 @@ defmodule Signaturex.Mixfile do
       name: "Signaturex",
       description: @description,
       elixir: "~> 0.13.1",
-      version: "0.0.2",
+      version: "0.0.3",
       package: package,
       deps: deps ]
   end
