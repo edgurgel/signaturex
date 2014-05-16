@@ -42,7 +42,7 @@ defmodule Signaturex do
     raise AuthenticationError, message: "Timestamp missing"
   end
   defp validate_timestamp!(timestamp, timestamp_grace) do
-    timestamp = timestamp |> String.to_char_list! |> list_to_integer
+    timestamp = timestamp |> List.from_char_data! |> list_to_integer
     if abs(Time.stamp - timestamp) < timestamp_grace do
       true
     else
