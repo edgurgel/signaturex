@@ -112,6 +112,7 @@ defmodule Signaturex do
   end
 
   defmodule Time do
+    @spec stamp :: non_neg_integer
     def stamp do
       {mega, sec, _micro} = :os.timestamp()
       mega * 1000000 + sec
