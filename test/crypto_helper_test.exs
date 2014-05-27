@@ -1,5 +1,5 @@
 defmodule Signaturex.CryptoHelperTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   import Signaturex.CryptoHelper
 
   test "hmac256_to_string" do

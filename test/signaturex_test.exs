@@ -1,5 +1,5 @@
 defmodule SignaturexTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias Signaturex.Time
   alias Signaturex.AuthenticationError
   import Signaturex
