@@ -28,7 +28,7 @@ defmodule Signaturex do
     try do
       validate!(key, secret, method, path, params, timestamp_grace)
     rescue
-      e in AuthenticationError -> false
+      _e in AuthenticationError -> false
     end
   end
 
