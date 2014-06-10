@@ -1,7 +1,9 @@
 defmodule Signaturex do
   alias Signaturex.CryptoHelper
   alias Signaturex.Time
-  defexception AuthenticationError, message: "Error on authentication"
+  defmodule AuthenticationError do
+    defexception message: "Error on authentication"
+  end
 
   @doc """
   Validate request
@@ -42,7 +44,7 @@ defmodule Signaturex do
     raise AuthenticationError, message: "Timestamp missing"
   end
   defp validate_timestamp!(timestamp, timestamp_grace) do
-    timestamp = timestamp |> List.from_char_data! |> list_to_integer
+    timestamp = timestamp |> String.to_char_list |> list_to_integer
     if abs(Time.stamp - timestamp) < timestamp_grace do
       true
     else
