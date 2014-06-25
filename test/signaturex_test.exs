@@ -12,10 +12,8 @@ defmodule SignaturexTest do
   setup do
     new Time
     expect(Time, :stamp, 0, 1234)
-  end
-
-  teardown do
-    unload Time
+    on_exit fn -> unload end
+    :ok
   end
 
   test "sign with string method" do

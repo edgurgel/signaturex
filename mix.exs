@@ -9,7 +9,7 @@ defmodule Signaturex.Mixfile do
     [ app: :signaturex,
       name: "Signaturex",
       description: @description,
-      elixir: "~> 0.14.0",
+      elixir: "~> 0.14.1",
       version: "0.0.5",
       package: package,
       deps: deps ]
