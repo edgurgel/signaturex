@@ -55,7 +55,7 @@ defmodule Signaturex do
   defp validate_key!(_, nil) do
      raise AuthenticationError, message: "Auth key missing"
   end
-  defp validate_key!(_key, _key), do: true
+  defp validate_key!(key, key), do: true
   defp validate_key!(_key, _auth_key) do
     raise AuthenticationError, message: "Invalid auth key"
   end
