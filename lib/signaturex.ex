@@ -43,8 +43,11 @@ defmodule Signaturex do
   defp validate_timestamp!(nil, _timestamp_grace) do
     raise AuthenticationError, message: "Timestamp missing"
   end
-  defp validate_timestamp!(timestamp, timestamp_grace) do
+  defp validate_timestamp!(timestamp, timestamp_grace) when is_binary(timestamp) do
     timestamp = timestamp |> String.to_char_list |> List.to_integer
+    validate_timestamp!(timestamp, timestamp_grace)
+  end
+  defp validate_timestamp!(timestamp, timestamp_grace) when is_integer(timestamp) do
     if abs(Time.stamp - timestamp) < timestamp_grace do
       true
     else

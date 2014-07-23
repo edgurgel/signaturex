@@ -63,6 +63,15 @@ defmodule SignaturexTest do
     assert validate("key", "secret", "post", "/some/path", params) == true
   end
 
+  test "validate signature with integer timestamp" do
+    params = %{ auth_signature: "3b237953a5ba6619875cbb2a2d43e8da9ef5824e8a2c689f6284ac85bc1ea0db",
+                auth_key: "key", auth_timestamp: 1234, auth_version: "1.0",
+                query: "params", go: "here" } |> hash_with_string_keys
+
+    assert validate!("key", "secret", "post", "/some/path", params) == true
+    assert validate("key", "secret", "post", "/some/path", params) == true
+  end
+
   test "validate invalid signature, invalid version" do
     params = %{ auth_signature: "3b237953a5ba6619875cbb2a2d43e8da9ef5824e8a2c689f6284ac85bc1ea0db",
                 auth_key: "key", auth_timestamp: "1234", auth_version: "2.0",
