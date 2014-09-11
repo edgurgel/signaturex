@@ -6,7 +6,7 @@ defmodule SignaturexTest do
   import :meck
 
   defp hash_with_string_keys(hash) do
-    Enum.traverse(hash, fn { k, v } -> { to_string(k), v } end)
+    for {k,v} <- hash, into: %{}, do: {to_string(k), v}
   end
 
   setup do

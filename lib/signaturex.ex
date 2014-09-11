@@ -102,12 +102,10 @@ defmodule Signaturex do
   end
 
   defp build_params(params) do
-    params
-      |> Enum.traverse(fn { k, v } ->
-           k = k |> to_string |> String.downcase
-           { k, v }
-         end)
-      |> Dict.delete("auth_signature")
+    for {k, v} <- params, into: %{} do
+      k = k |> to_string |> String.downcase
+      {k, v}
+    end |> Dict.delete("auth_signature")
   end
 
   defp auth_data(app_key) do
