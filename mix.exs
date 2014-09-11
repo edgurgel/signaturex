@@ -18,7 +18,7 @@ defmodule Signaturex.Mixfile do
   def application, do: []
 
   defp deps do
-    [ { :meck, github: "eproxus/meck", ref: "69f02255a8219185bf55da303981d86886b3c24b", only: :test } ]
+    [ { :meck, "~> 0.8.2", only: :test } ]
   end
 
   defp package do

@@ -1,1 +1,1 @@
-%{"meck": {:git, "git://github.com/eproxus/meck.git", "69f02255a8219185bf55da303981d86886b3c24b", [ref: "69f02255a8219185bf55da303981d86886b3c24b"]}}
+%{"meck": {:package, "0.8.2"}}
