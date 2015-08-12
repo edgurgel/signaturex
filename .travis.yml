@@ -1,9 +1,6 @@
+sudo: false
 language: elixir
-notifications:
-  recipients:
-    - eduardo@gurgel.me
 elixir:
-  - 1.0.0
   - 1.0.4
   - 1.0.5
 otp_release:
@@ -13,5 +10,3 @@ otp_release:
   - 17.4
   - 17.5
   - 18.0
-script: mix test --no-start
-env: MIX_ENV=test
