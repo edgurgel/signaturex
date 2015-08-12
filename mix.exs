@@ -27,6 +27,6 @@ defmodule Signaturex.Mixfile do
   defp package do
     [ contributors: ["Eduardo Gurgel"],
       licenses: ["MIT"],
-      links: [ { "Github", "https://github.com/edgurgel/signaturex" } ] ]
+      links: %{ "Github" => "https://github.com/edgurgel/signaturex" } ]
   end
 end
