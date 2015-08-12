@@ -1,6 +1,6 @@
 # Signaturex [![Build Status](https://travis-ci.org/edgurgel/signaturex.svg?branch=master)](https://travis-ci.org/edgurgel/signaturex)
 
-Simple key/secret based authentication for APIs.
+Simple key/secret based authentication for APIs ([documentation](http://hexdocs.pm/signaturex/)).
 
 Totally based on https://github.com/mloughran/signature
 
