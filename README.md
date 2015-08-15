@@ -6,7 +6,7 @@ Totally based on https://github.com/mloughran/signature
 
 ## Usage
 
-You will need Elixir at least 0.14.* and Erlang 17.0
+You will need Elixir at least 1.0 and Erlang 17.0
 
 Client side:
 
