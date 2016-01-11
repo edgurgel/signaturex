@@ -9,7 +9,7 @@ defmodule Signaturex.Mixfile do
     [ app: :signaturex,
       name: "Signaturex",
       description: @description,
-      elixir: "~> 1.0.0",
+      elixir: "~> 1.0",
       version: "1.0.0",
       package: package,
       deps: deps,
@@ -25,7 +25,7 @@ defmodule Signaturex.Mixfile do
   end
 
   defp package do
-    [ contributors: ["Eduardo Gurgel"],
+    [ maintainers: ["Eduardo Gurgel"],
       licenses: ["MIT"],
       links: %{ "Github" => "https://github.com/edgurgel/signaturex" } ]
   end
