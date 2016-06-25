@@ -10,7 +10,7 @@ defmodule Signaturex.Mixfile do
       name: "Signaturex",
       description: @description,
       elixir: "~> 1.2",
-      version: "1.0.1",
+      version: "1.1.0",
       package: package,
       deps: deps,
       source_url: "https://github.com/edgurgel/signaturex" ]
