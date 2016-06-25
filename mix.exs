@@ -9,8 +9,8 @@ defmodule Signaturex.Mixfile do
     [ app: :signaturex,
       name: "Signaturex",
       description: @description,
-      elixir: "~> 1.0",
-      version: "1.0.1",
+      elixir: "~> 1.2",
+      version: "1.1.0",
       package: package,
       deps: deps,
       source_url: "https://github.com/edgurgel/signaturex" ]
