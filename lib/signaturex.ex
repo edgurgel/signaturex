@@ -68,7 +68,8 @@ defmodule Signaturex do
   end
   defp validate_signature!(secret, method, path, params, auth_signature) do
     params = build_params(params)
-    if auth_signature(secret, method, path, params) == auth_signature do
+    signature = auth_signature(secret, method, path, params)
+    if  CryptoHelper.identical?(signature, auth_signature) do
       true
     else
       raise AuthenticationError, message: "Invalid auth signature"
