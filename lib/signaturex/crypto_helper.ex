@@ -22,6 +22,18 @@ defmodule Signaturex.CryptoHelper do
     |> List.to_string
   end
 
+  @doc """
+  Constant time string comparison
+  """
+  def identical?(<<>>, false),  do: false
+  def identical?(<<>>, <<>>),  do: true
+  def identical?(string1, string2) when byte_size(string1) != byte_size(string2), do: false
+  def identical?(<<_head :: binary-size(1), tail :: binary>>, false), do: identical?(tail, false)
+  def identical?(<<head :: binary-size(1), tail1 :: binary>>, <<head :: binary-size(1), tail2 :: binary>>), do:
+    identical?(tail1, tail2)
+  def identical?(<<_head1 :: binary-size(1), tail1 :: binary>>, <<_head2 :: binary-size(1), _tail2 :: binary>>), do:
+    identical?(tail1, false)
+
   defp md5(data), do: :crypto.hash(:md5, data)
   defp hexlify(binary) do
     :lists.flatten(for b <- :erlang.binary_to_list(binary), do: :io_lib.format("~2.16.0B", [b]))

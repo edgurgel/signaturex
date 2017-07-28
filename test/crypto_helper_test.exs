@@ -9,4 +9,14 @@ defmodule Signaturex.CryptoHelperTest do
   test "md5_to_string" do
     assert md5_to_string("The quick brown fox jumps over the lazy dog") == "9e107d9d372bb6826bd81d3542a419d6"
   end
+
+  test "constant time string compare" do
+    string1 = "1111111111111111111111111111111111111111111111111111111111111111"
+    string2 = "2222222222222222222222222222222222222222222222222222222222222222"
+    {time1, false} = :timer.tc(Kernel, :==, [string1, string2])
+    {time2, false} = :timer.tc(Signaturex.CryptoHelper, :identical?, [string1, string2])
+    assert time2 > time1
+    assert identical?(string1, string1)
+    assert identical?(string2, string2)
+  end
 end
