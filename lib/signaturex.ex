@@ -10,7 +10,7 @@ defmodule Signaturex do
 
   Raises an AuthenticationError if the request is invalid
   """
-  @spec validate!(binary, binary, binary | atom, binary, Dict.t, integer) :: true
+  @spec validate!(binary, binary, binary | atom, binary, Map.t, integer) :: true
   def validate!(key, secret, method, path, params, timestamp_grace \\ 600) do
     validate_version!(params["auth_version"])
     validate_timestamp!(params["auth_timestamp"], timestamp_grace)
@@ -25,7 +25,7 @@ defmodule Signaturex do
 
   Returns true or false
   """
-  @spec validate(binary, binary, binary | atom, binary, Dict.t, integer) :: boolean
+  @spec validate(binary, binary, binary | atom, binary, Map.t, integer) :: boolean
   def validate(key, secret, method, path, params, timestamp_grace \\ 600) do
     try do
       validate!(key, secret, method, path, params, timestamp_grace)
@@ -44,7 +44,7 @@ defmodule Signaturex do
     raise AuthenticationError, message: "Timestamp missing"
   end
   defp validate_timestamp!(timestamp, timestamp_grace) when is_binary(timestamp) do
-    timestamp = timestamp |> String.to_char_list |> List.to_integer
+    timestamp = timestamp |> String.to_charlist |> List.to_integer
     validate_timestamp!(timestamp, timestamp_grace)
   end
   defp validate_timestamp!(timestamp, timestamp_grace) when is_integer(timestamp) do
@@ -80,13 +80,13 @@ defmodule Signaturex do
   Sign a request using `key`, `secret`, HTTP `method`,
   query string `params` and an optional body
   """
-  @spec sign(binary, binary, binary | atom, binary, Dict.t) :: Dict.t
+  @spec sign(binary, binary, binary | atom, binary, Map.t) :: Map.t
   def sign(key, secret, method, path, params) do
     auth_data = auth_data(key)
     params = build_params(params)
-    params = Dict.merge(params, auth_data)
+    params = Map.merge(params, auth_data)
     signature = auth_signature(secret, method, path, params)
-    Dict.put(auth_data, "auth_signature", signature)
+    Map.put(auth_data, "auth_signature", signature)
   end
 
   defp auth_signature(secret, method, path, params) do
@@ -106,7 +106,7 @@ defmodule Signaturex do
     for {k, v} <- params, into: %{} do
       k = k |> to_string |> String.downcase
       {k, v}
-    end |> Dict.delete("auth_signature")
+    end |> Map.delete("auth_signature")
   end
 
   defp auth_data(app_key) do

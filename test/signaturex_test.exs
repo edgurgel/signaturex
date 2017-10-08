@@ -12,7 +12,7 @@ defmodule SignaturexTest do
   setup do
     new Time
     expect(Time, :stamp, 0, 1234)
-    on_exit fn -> unload end
+    on_exit fn -> unload() end
     :ok
   end
 
