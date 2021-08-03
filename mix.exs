@@ -16,10 +16,12 @@ defmodule Signaturex.Mixfile do
       source_url: "https://github.com/edgurgel/signaturex" ]
   end
 
-  def application, do: []
+  def application do
+    [ extra_applications: [:crypto] ]
+  end
 
   defp deps do
-    [{ :meck, "~> 0.8.2", only: :test },
+    [{ :meck, "~> 0.9.2", only: :test },
      { :earmark, "~> 1.0", only: :dev },
      { :ex_doc, "~> 0.16", only: :dev }]
   end
