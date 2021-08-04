@@ -6,29 +6,35 @@ defmodule Signaturex.Mixfile do
   """
 
   def project do
-    [ app: :signaturex,
+    [
+      app: :signaturex,
       name: "Signaturex",
       description: @description,
       elixir: "~> 1.10",
       version: "1.4.0",
       package: package(),
       deps: deps(),
-      source_url: "https://github.com/edgurgel/signaturex" ]
+      source_url: "https://github.com/edgurgel/signaturex"
+    ]
   end
 
   def application do
-    [ extra_applications: [:crypto] ]
+    [extra_applications: [:crypto]]
   end
 
   defp deps do
-    [{ :meck, "~> 0.9.2", only: :test },
-     { :earmark, "~> 1.0", only: :dev },
-     { :ex_doc, "~> 0.16", only: :dev }]
+    [
+      {:meck, "~> 0.9.2", only: :test},
+      {:earmark, "~> 1.0", only: :dev},
+      {:ex_doc, "~> 0.25", only: :dev}
+    ]
   end
 
   defp package do
-    [ maintainers: ["Eduardo Gurgel"],
+    [
+      maintainers: ["Eduardo Gurgel"],
       licenses: ["MIT"],
-      links: %{ "Github" => "https://github.com/edgurgel/signaturex" } ]
+      links: %{"Github" => "https://github.com/edgurgel/signaturex"}
+    ]
   end
 end
