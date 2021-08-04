@@ -4,7 +4,7 @@ defmodule Signaturex.CryptoHelper do
   """
   @spec hmac256_to_string(binary, binary) :: binary
   def hmac256_to_string(app_secret, to_sign) do
-    :crypto.hmac(:sha256, app_secret, to_sign)
+    hmac(:sha256, app_secret, to_sign)
     |> hexlify
     |> :string.to_lower
     |> List.to_string
@@ -37,5 +37,14 @@ defmodule Signaturex.CryptoHelper do
   defp md5(data), do: :crypto.hash(:md5, data)
   defp hexlify(binary) do
     :lists.flatten(for b <- :erlang.binary_to_list(binary), do: :io_lib.format("~2.16.0B", [b]))
+  end
+
+  # borrowed from
+  # https://github.com/elixir-plug/plug_crypto/blob/master/lib/plug/crypto/message_verifier.ex#L97-L102
+  # to support Erlang < 22 (hmac/3) and Erlang >= 24 (mac/4)
+  if Code.ensure_loaded?(:crypto) and function_exported?(:crypto, :mac, 4) do
+    defp hmac(digest, key, data), do: :crypto.mac(:hmac, digest, key, data)
+  else
+    defp hmac(digest, key, data), do: :crypto.hmac(digest, key, data)
   end
 end
